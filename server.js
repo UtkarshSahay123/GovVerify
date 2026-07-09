@@ -86,9 +86,7 @@ app.use((req, res, next) => {
 // --- In-memory "database" (for documents) ---
 const masterHashes = new Set();
 const studentVerifiedFiles = [];
-
-if (!fs.existsSync('./verified_documents')) fs.mkdirSync('./verified_documents');
-
+// Removed local verified_documents directory creation for Vercel Serverless compatibility
 // Serve static files from subdirectories
 app.use('/HomePage', express.static(path.join(__dirname, 'HomePage')));
 app.use('/employee-login', express.static(path.join(__dirname, 'employee-login')));
@@ -546,8 +544,7 @@ app.get('/api/certificates', async (req, res) => {
 });
 
 
-const uploadDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
+// Removed local upload directory creation for Vercel Serverless compatibility
 
 app.post('/api/certificates/upload', upload.single('certFile'), async (req, res) => {
     if (!req.file) return res.status(400).json({ message: 'No file uploaded.' });
