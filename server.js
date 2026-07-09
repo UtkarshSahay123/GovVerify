@@ -23,7 +23,8 @@ const transporter = nodemailer.createTransport({
 });
 
 const pool = new Pool({
-  connectionString: 'postgresql://postgres:1234@localhost:5432/auth'
+  connectionString: process.env.DATABASE_URL || 'postgresql://postgres:1234@localhost:5432/auth',
+  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false
 });
 
 pool.connect((err, client, release) => {
@@ -68,7 +69,10 @@ const DB_PATH = path.join(__dirname, 'database.json');
 const SALT_ROUNDS = 10;
 
 // --- Core Middleware ---
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || true,
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -268,7 +272,7 @@ app.post('/api/login', async (req, res) => {
     res.cookie('auth', JSON.stringify({ username: user.username, role: user.role }), {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
     });
 
     res.status(200).json({ message: 'Login successful!', user: { username: user.username, role: user.role } });
@@ -753,6 +757,10 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'An unexpected internal server error occurred.' });
 });
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
+if (require.main === module) {
+  app.listen(port, () => {
+      console.log(`Server running at http://localhost:${port}`);
+  });
+}
+
+module.exports = app;
