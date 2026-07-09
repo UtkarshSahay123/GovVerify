@@ -4,15 +4,18 @@
     {
       "src": "server.js",
       "use": "@vercel/node"
-    },
+    }
+  ],
+  "redirects": [
     {
-      "src": "**/*",
-      "use": "@vercel/static"
+      "source": "/",
+      "destination": "/HomePage/index.html",
+      "permanent": true
     }
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/api/(.*)",
       "destination": "/server.js"
     }
   ]
