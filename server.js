@@ -52,6 +52,8 @@ pool.connect((err, client, release) => {
         full_name VARCHAR(255),
         identifier VARCHAR(255)
     );
+    ALTER TABLE users ADD COLUMN IF NOT EXISTS full_name VARCHAR(255);
+    ALTER TABLE users ADD COLUMN IF NOT EXISTS identifier VARCHAR(255);
   `, (err, result) => {
     release();
     if (err) {
@@ -175,7 +177,7 @@ app.post('/api/signup', async (req, res) => {
   }
 
   try {
-    const existingUser = await pool.query('SELECT username FROM users WHERE LOWER(username) = LOWER($1) AND role = $2', [username, role]);
+    const existingUser = await pool.query('SELECT username FROM users WHERE LOWER(username) = LOWER($1)', [username]);
     
     if (existingUser.rowCount > 0) {
       return res.status(409).json({ error: 'Username is already taken.' });
