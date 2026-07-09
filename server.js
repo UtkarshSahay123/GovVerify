@@ -8,6 +8,7 @@ const path = require('path');
 const sharp = require('sharp');
 // Canvas and PDF.js removed for Vercel Serverless compatibility
 const cookieParser = require('cookie-parser');
+const { put, del } = require('@vercel/blob');
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
 const { Pool } = require('pg');
@@ -506,7 +507,7 @@ app.get('/api/student/certificates', requireAuth, async (req, res) => {
       issueDate: row.issue_date,
       type: row.certificate_type,
       certificateId: row.certificate_id,
-      fileUrl: row.file_path ? `/uploads/${row.file_path}` : null
+      fileUrl: row.file_path && row.file_path.startsWith('https://') ? row.file_path : (row.file_path ? `/uploads/${row.file_path}` : null)
     }));
     res.json({ certificates: formattedCertificates });
   } catch (error) {
@@ -537,7 +538,7 @@ app.get('/api/certificates', async (req, res) => {
             type: row.certificate_type,
             certificateId: row.certificate_id,
             studentName: row.student_name,
-            fileUrl: row.file_path ? `/uploads/${row.file_path}` : null
+            fileUrl: row.file_path && row.file_path.startsWith('https://') ? row.file_path : (row.file_path ? `/uploads/${row.file_path}` : null)
         }));
         res.json({ certificates: formattedCertificates });
     } catch (error) {
@@ -570,10 +571,10 @@ app.post('/api/certificates/upload', upload.single('certFile'), async (req, res)
     try {
         const { hash } = await processDocument(req.file);
         
-        // Save file to disk
-        const fileName = `${Date.now()}-${req.file.originalname}`;
-        const filePath = path.join(uploadDir, fileName);
-        fs.writeFileSync(filePath, req.file.buffer);
+        // Upload to Vercel Blob
+        const blob = await put(req.file.originalname, req.file.buffer, { 
+            access: 'public'
+        });
         
         // Insert into PostgreSQL
         const query = `
@@ -584,7 +585,7 @@ app.post('/api/certificates/upload', upload.single('certFile'), async (req, res)
         `;
         const values = [
           certificateId, studentName, certName, certType, 
-          issuingAuthority, issueDate || null, fileName, hash
+          issuingAuthority, issueDate || null, blob.url, hash
         ];
         
         await pool.query(query, values);
@@ -592,7 +593,7 @@ app.post('/api/certificates/upload', upload.single('certFile'), async (req, res)
         res.json({ 
             message: 'Certificate uploaded and verified successfully!', 
             certificateId,
-            fileUrl: `/uploads/${fileName}`
+            fileUrl: blob.url
         });
     } catch (error) {
         console.error('Upload Error:', error);
@@ -646,10 +647,15 @@ app.delete('/api/certificates/:certificateId', async (req, res) => {
             return res.status(404).json({ error: 'Certificate not found.' });
         }
         
-        // Optionally, delete the file from the filesystem too
-        const filePath = path.join(__dirname, 'uploads', result.rows[0].file_path);
-        if (fs.existsSync(filePath)) {
-            fs.unlinkSync(filePath);
+        // Delete from Vercel Blob (if it's a blob url) or local fallback
+        const filePathStr = result.rows[0].file_path;
+        if (filePathStr && filePathStr.startsWith('https://')) {
+            await del(filePathStr);
+        } else {
+            const localPath = path.join(__dirname, 'uploads', filePathStr);
+            if (fs.existsSync(localPath)) {
+                fs.unlinkSync(localPath);
+            }
         }
         
         res.json({ message: 'Certificate deleted successfully.' });
@@ -686,7 +692,7 @@ app.post('/api/certificates/search', express.json(), async (req, res) => {
                 issueDate: cert.issue_date,
                 uploadDate: cert.upload_date,
                 hash: cert.sha256_hash,
-                fileUrl: `/uploads/${cert.file_path}`
+                fileUrl: cert.file_path && cert.file_path.startsWith('https://') ? cert.file_path : `/uploads/${cert.file_path}`
             }
         });
     } catch (err) {
