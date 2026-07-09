@@ -1,12 +1,10 @@
 const express = require('express');
 const multer = require('multer');
-const Tesseract = require('tesseract.js');
 const crypto = require('crypto');
 const fs = require('fs');
 const fsExtra = require('fs-extra');
 const path = require('path');
-const sharp = require('sharp');
-// Canvas and PDF.js removed for Vercel Serverless compatibility
+// Tesseract, Sharp, Canvas and PDF.js removed for Vercel Serverless compatibility
 const cookieParser = require('cookie-parser');
 const { put, del } = require('@vercel/blob');
 const bcrypt = require('bcryptjs');
