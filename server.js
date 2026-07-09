@@ -6,8 +6,7 @@ const fs = require('fs');
 const fsExtra = require('fs-extra');
 const path = require('path');
 const sharp = require('sharp');
-const pdfjsLib = require('pdfjs-dist/legacy/build/pdf');
-const { Canvas, createCanvas, Image } = require('canvas');
+// Canvas and PDF.js removed for Vercel Serverless compatibility
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
@@ -143,73 +142,23 @@ app.use('/student-dashboard', requireAuthRedirect, express.static(path.join(__di
 
 const upload = multer({ storage: multer.memoryStorage() });
 
-// --- CanvasFactory for pdf.js rendering ---
-class NodeCanvasFactory {
-    create(width, height) {
-        const canvas = createCanvas(width, height);
-        const context = canvas.getContext("2d");
-        return { canvas, context };
-    }
-    reset(canvasAndContext, width, height) {
-        canvasAndContext.canvas.width = width;
-        canvasAndContext.canvas.height = height;
-    }
-    destroy(canvasAndContext) {
-        canvasAndContext.canvas.width = 0;
-        canvasAndContext.canvas.height = 0;
-        canvasAndContext.canvas = null;
-        canvasAndContext.context = null;
-    }
-}
-
 async function processDocument(file) {
     let fullText = '';
     let hash = '';
-
+    
+    // OCR disabled for Vercel Serverless compatibility (memory limits)
     try {
         if (file.buffer && file.buffer.length > 0) {
-            // --- Process PDF ---
-            if (file.mimetype === 'application/pdf') {
-                const pdf = await pdfjsLib.getDocument(file.buffer).promise;
-                const numPages = pdf.numPages;
-                let combinedText = '';
-
-                for (let i = 1; i <= numPages; i++) {
-                    const page = await pdf.getPage(i);
-                    const viewport = page.getViewport({ scale: 1.5 });
-                    const canvasFactory = new NodeCanvasFactory();
-                    const { canvas, context } = canvasFactory.create(viewport.width, viewport.height);
-                    
-                    await page.render({ canvasContext: context, viewport, canvasFactory }).promise;
-                    
-                    const imageBuffer = canvas.toBuffer('image/png');
-                    const { data: { text } } = await Tesseract.recognize(imageBuffer, 'eng');
-                    combinedText += text + '\n';
-                }
-                fullText = combinedText;
-
-            // --- Process Image ---
-            } else if (file.mimetype.startsWith('image/')) {
-                try {
-                    const metadata = await sharp(file.buffer).metadata();
-                    if (metadata.width >= 10 && metadata.height >= 10) {
-                        const { data: { text } } = await Tesseract.recognize(file.buffer, 'eng');
-                        fullText = text;
-                    }
-                } catch (e) {
-                    console.warn("Sharp validation failed, falling back to raw hash:", e.message);
-                }
-            }
+            hash = crypto.createHash('sha256').update(file.buffer).digest('hex');
         }
     } catch (error) {
-        console.warn("OCR processing failed, falling back to raw file hash:", error.message);
+        console.warn("Hashing failed:", error.message);
     }
 
     if (fullText && fullText.trim().length > 0) {
         const standardizedText = fullText.toLowerCase().replace(/[\W_]/g, '');
         hash = crypto.createHash('sha256').update(standardizedText).digest('hex');
-    } else {
-        // Fallback: If OCR failed, returned no text, or file is empty, hash the raw file bytes
+    } else if (!hash) {
         hash = crypto.createHash('sha256').update(file.buffer || Buffer.alloc(0)).digest('hex');
     }
 
