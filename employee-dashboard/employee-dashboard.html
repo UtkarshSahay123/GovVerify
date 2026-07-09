@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard - GovVerify</title>
+    <link rel="stylesheet" href="employee-dashboard.css">
+    <link rel="stylesheet" href="/HomePage/toast.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <a href="/" style="text-decoration: none; color: inherit; display: block;">
+                <div class="logo-section">
+                    <div class="logo-icon" id="logoIcon"><i class="fas fa-shield-alt"></i></div>
+                    <span class="brand-name" id="brandName">GovVerify</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="nav-center">
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#dashboard" class="nav-link active" data-section="dashboard">Dashboard</a></li>
+                <li><a href="#upload" class="nav-link" data-section="upload">Upload</a></li>
+                <li><a href="#verify" class="nav-link" data-section="verify">Verify</a></li>
+                <li><a href="#manage" class="nav-link" data-section="manage">Manage</a></li>
+                <li><a href="#settings" class="nav-link" data-section="settings">Settings</a></li>
+                <li><a href="#notifications" class="nav-link" data-section="notifications">Notifications</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="nav-right">
+            <div class="notification-icon" id="notificationIcon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                <span class="notification-badge" id="notificationBadge" style="display: none;"></span>
+            </div>
+            <div class="user-profile">
+                <i class="fas fa-user-circle profile-avatar"
+                    style="font-size: 32px; color: #64748b; line-height: 1;"></i>
+                <div class="user-info">
+                    <span class="user-name" id="employeeName">Welcome, Employee</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboardSection" class="content-section active">
+            <div class="welcome-section">
+                <h1 id="welcomeEmployee">Welcome to Govify</h1>
+                <p>Manage your institution's certificates with ease and confidence.</p>
+            </div>
+
+            <div class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="action-cards">
+                    <div class="action-card upload-card" id="uploadNewCert">
+                        <div class="card-icon upload-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14,2 14,8 20,8"></polyline>
+                                <line x1="12" y1="18" x2="12" y2="12"></line>
+                                <polyline points="9,15 12,12 15,15"></polyline>
+                            </svg>
+                        </div>
+                        <div class="card-content">
+                            <h3>Upload New Certificate</h3>
+                            <p>Add a new employee certificate to the system.</p>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </div>
+
+                    <div class="action-card verify-card" id="verifyStudentCert">
+                        <div class="card-icon verify-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M9 12l2 2 4-4"></path>
+                                <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
+                                <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3"></path>
+                                <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3"></path>
+                                <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3"></path>
+                            </svg>
+                        </div>
+                        <div class="card-content">
+                            <h3>Verify Student Certificate</h3>
+                            <p>Check the validity and status of a student's certificate.</p>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="certificates-section">
+                <h2>Your Institution's Certificates</h2>
+                <div class="certificates-table-container">
+                    <table class="certificates-table" id="certificatesTable">
+                        <thead>
+                            <tr>
+                                <th>Certificate Name</th>
+                                <th>Issued By</th>
+                                <th>Issue Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="certificatesTableBody">
+                            <!-- Certificates will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                    <div class="no-certificates" id="noCertificates" style="display: none;">
+                        <p>No certificates registered yet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upload Section -->
+        <section id="uploadSection" class="content-section">
+            <div class="section-header">
+                <h1>Upload New Certificate</h1>
+                <p>Please fill out the form below to upload your new certificate. Ensure all details are accurate and
+                    the file is in the correct format.</p>
+            </div>
+            <div class="upload-form-container">
+                <form class="upload-form" id="uploadForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="certName">Certificate Name</label>
+                            <input type="text" id="certName" name="certName" placeholder="e.g. Certified Professional"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="certType">Certificate Type</label>
+                            <select id="certType" name="certType" required>
+                                <option value="">Select certificate type</option>
+                                <option value="professional">Professional Certification</option>
+                                <option value="academic">Academic Degree</option>
+                                <option value="technical">Technical Certification</option>
+                                <option value="license">Professional License</option>
+                                <option value="training">Training Certificate</option>
+                                <option value="achievement">Achievement Award</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="issuingAuthority">Issuing Authority</label>
+                            <select id="issuingAuthority" name="issuingAuthority" required>
+                                <option value="">Select issuing authority</option>
+                                <option value="government-department">Government Department</option>
+                                <option value="national-certification-board">National Certification Board</option>
+                                <option value="state-department-education">State Department of Education</option>
+                                <option value="national-university">National University</option>
+                                <option value="international-literacy">International Literacy Association</option>
+                                <option value="science-council">National Science Council</option>
+                                <option value="professional-board">Professional Licensing Board</option>
+                                <option value="technical-institute">Technical Training Institute</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="issueDate">Date of Issue</label>
+                            <input type="date" id="issueDate" name="issueDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="certificateId">Certificate ID <span class="required">*</span></label>
+                            <input type="text" id="certificateId" name="certificateId"
+                                placeholder="Enter unique certificate identifier" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="studentName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="studentName" name="studentName"
+                                placeholder="Enter student's full name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="certFile">Certificate File</label>
+                        <div class="file-upload-area" id="fileUploadArea">
+                            <div class="upload-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7,10 12,15 17,10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                            </div>
+                            <p><span class="upload-link">Upload a file</span> or drag and drop</p>
+                            <p class="file-info">PDF, PNG, JPG up to 10MB</p>
+                            <input type="file" id="certFile" name="certFile" accept=".pdf,.png,.jpg,.jpeg" hidden
+                                required>
+                        </div>
+                        <div class="file-preview" id="filePreview" style="display: none;"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="confirmAccuracy" name="confirmAccuracy" required>
+                            <span class="checkmark"></span>
+                            I confirm that the information provided is accurate and the uploaded file is a true copy of
+                            the original certificate.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit for Verification</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Verify Section -->
+        <section id="verifySection" class="content-section">
+            <div class="verify-container">
+                <div class="verify-header">
+                    <h1>Certificate Verification</h1>
+                    <p>Upload a certificate to verify its authenticity.</p>
+                </div>
+
+                <div class="verify-upload-section">
+                    <div class="verify-file-upload" id="verifyFileUpload">
+                        <input type="file" id="verifyFileInput" accept=".pdf,.png,.jpg,.jpeg" hidden>
+                        <div class="upload-button" id="uploadCertificateBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14,2 14,8 20,8"></polyline>
+                                <line x1="12" y1="18" x2="12" y2="12"></line>
+                                <polyline points="9,15 12,12 15,15"></polyline>
+                            </svg>
+                            Upload Certificate
+                        </div>
+                    </div>
+
+                    <div class="verify-button-container" id="verifyButtonContainer" style="display: none;">
+                        <button class="verify-btn" id="verifyBtn">Verify</button>
+                    </div>
+                </div>
+
+                <div class="verification-status-section">
+                    <h2>Verification Status</h2>
+                    <div class="status-indicator" id="statusIndicator">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12,6 12,12 16,14"></polyline>
+                        </svg>
+                        <span id="statusText">Awaiting upload</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manage Section -->
+        <section id="manageSection" class="content-section">
+            <div class="section-header">
+                <h1>Manage Certificates</h1>
+                <p>View and manage all certificates in your institution.</p>
+            </div>
+            <div class="manage-content">
+                <div class="search-filters">
+                    <input type="text" id="searchCerts" placeholder="Search certificates..." class="search-input">
+                    <select id="statusFilter" class="filter-select">
+                        <option value="">All Statuses</option>
+                        <option value="active">Active</option>
+                        <option value="pending">Pending Review</option>
+                        <option value="expired">Expired</option>
+                    </select>
+                </div>
+                <div class="certificates-grid" id="certificatesGrid">
+                    <!-- Certificates will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settingsSection" class="content-section">
+            <div class="section-header">
+                <h1>Settings</h1>
+                <p>Manage your account and application preferences.</p>
+            </div>
+            <div class="settings-content">
+                <div class="settings-group">
+                    <h3>Account Settings</h3>
+                    <div class="form-group">
+                        <label for="userEmail">Registered Email</label>
+                        <input type="email" id="userEmail" value="Loading..." readonly>
+                    </div>
+
+                    <div id="passwordSection">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" value="••••••••" readonly>
+                            <button class="edit-btn" id="requestOtpBtn" style="margin-left:10px;">Change
+                                Password</button>
+                        </div>
+                    </div>
+
+                    <div id="otpSection"
+                        style="display: none; border-top: 1px solid #e2e8f0; margin-top: 15px; padding-top: 15px;">
+                        <div class="form-group">
+                            <label for="otpInput">Enter OTP (Sent to Email)</label>
+                            <input type="text" id="otpInput" placeholder="Enter 6-digit code">
+                        </div>
+                        <div class="form-group">
+                            <label for="newPasswordInput">New Password</label>
+                            <input type="password" id="newPasswordInput" placeholder="Enter new password">
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <button class="save-btn" id="confirmPasswordBtn">Update Password</button>
+                            <button class="edit-btn" id="cancelOtpBtn">Cancel</button>
+                            <button class="edit-btn" id="resendOtpBtn" style="margin-left: auto;" disabled>Resend OTP
+                                (60s)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-group" style="margin-top: 2rem;">
+                    <h3>Account Access</h3>
+                    <div class="form-group">
+                        <button class="save-btn" id="logoutSettingsBtn"
+                            style="background-color: #ef4444; color: white;">
+                            <i class="fas fa-sign-out-alt"></i> Log Out
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notifications Section -->
+        <section id="notificationsSection" class="content-section">
+            <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h1>Notifications</h1>
+                    <p>Stay updated with the latest activities and alerts.</p>
+                </div>
+                <button id="clearNotificationsBtn" style="background-color: #ef4444; color: white; border: none; cursor: pointer; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 500;">Clear All</button>
+            </div>
+            <div class="notifications-content" id="notificationsListContainer">
+                <!-- Notifications will be rendered dynamically here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Verification Success Modal -->
+    <div class="modal-overlay" id="verifiedModal" style="display: none;">
+        <div class="verification-modal verified-modal">
+            <div class="modal-header">
+                <div class="success-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20,6 9,17 4,12"></polyline>
+                    </svg>
+                </div>
+                <h2>Certificate Verified</h2>
+                <p>Your certificate has been successfully verified and is now active in the system.</p>
+            </div>
+
+            <div class="certificate-details">
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14,2 14,8 20,8"></polyline>
+                        </svg>
+                    </div>
+                    <div class="detail-content">
+                        <h4 id="verifiedCertType">Certificate Type: Professional Certification</h4>
+                        <p id="verifiedCertId">Certificate ID: 1234567890</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <div class="detail-content">
+                        <h4 id="verifiedIssueDate">Issued Date: 2023-08-15</h4>
+                        <p id="verifiedIssuedBy">Issued by: National Certification Board</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <div class="detail-content">
+                        <h4 id="verifiedValidUntil">Valid Until: 2025-08-14</h4>
+                        <p id="verifiedExpiresOn">Expires on: 2025-08-14</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="close-btn" onclick="closeVerificationModal()">Close</button>
+                <button class="view-certificate-btn" onclick="viewCertificateFile()">View Certificate</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Verification Mismatch Modal -->
+    <div class="modal-overlay" id="mismatchModal" style="display: none;">
+        <div class="verification-modal mismatch-modal">
+            <div class="modal-header">
+                <div class="error-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                        <path d="M12 9v4"></path>
+                        <path d="m12 17 .01 0"></path>
+                    </svg>
+                </div>
+                <h2>Certificate Mismatched</h2>
+                <p id="mismatchMessage">The name on the certificate does not match the name in your profile.</p>
+            </div>
+
+            <div class="mismatch-details">
+                <h3>
+                    <p>The uploaded document does not match the actual document. Verification has failed. Please upload
+                        a
+                        valid document.</p>
+                </h3>
+            </div>
+
+            <div class="modal-actions">
+                <button class="review-certificate-btn" onclick="reviewCertificate()">Review Certificate</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/HomePage/toast.js"></script>
+    <script src="employee-dashboard.js"></script>
+</body>
+
+</html>

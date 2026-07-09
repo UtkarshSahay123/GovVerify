@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - GovVerify</title>
+    <link rel="stylesheet" href="/student-dashboard/student-dashboard.css">
+    <link rel="stylesheet" href="/HomePage/toast.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="/" style="text-decoration: none; color: inherit; display: block; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; font-size: 20px; font-weight: bold;">
+                        <i class="fas fa-shield-alt" style="color: #3b82f6; font-size: 24px; margin-right: 8px;"></i>
+                        <span>GovVerify</span>
+                    </div>
+                </a>
+                <div class="user-profile">
+                    <div class="user-avatar"
+                        style="width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:#e0e0e0;border-radius:50%;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="4" />
+                            <path d="M6 20v-2a6 6 0 0 1 12 0v2" />
+                        </svg>
+                    </div>
+                    <div class="user-info">
+                        <h3 class="user-name" id="studentName">Student</h3>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="javascript:void(0)" class="nav-link" data-section="dashboard">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7" />
+                                <rect x="14" y="3" width="7" height="7" />
+                                <rect x="14" y="14" width="7" height="7" />
+                                <rect x="3" y="14" width="7" height="7" />
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link" data-section="certificates">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14,2 14,8 20,8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                                <polyline points="10,9 9,9 8,9" />
+                            </svg>
+                            My Certificates
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link" data-section="verify">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M9 12l2 2 4-4" />
+                                <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3" />
+                                <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3" />
+                                <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3" />
+                                <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3" />
+                            </svg>
+                            Get Certificate
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link" data-section="history">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M3 3v5h5" />
+                                <path d="M3.05 13A9 9 0 1 0 6 5.3L3 8" />
+                                <path d="M12 7v5l4 2" />
+                            </svg>
+                            Access History
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="nav-link" data-section="settings">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="3" />
+                                <path
+                                    d="M12 1v6m0 6v6m11-7h-6m-6 0H1m17-4a4 4 0 0 1-8 0 4 4 0 0 1 8 0zM7 21a4 4 0 0 1-8 0 4 4 0 0 1 8 0z" />
+                            </svg>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="logoutBtn">
+                    <svg class="logout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16,17 21,12 16,7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    Logout
+                </button>
+                <p class="last-updated">Last updated: July 26, 2024</p>
+            </div>
+        </aside>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <div class="welcome-header">
+                    <h1 class="welcome-title" id="welcomeTitle">Welcome, Student</h1>
+                    <p class="welcome-subtitle">Here's a summary of your academic achievements and profile.</p>
+                </div>
+
+                <!-- Verified Certificates -->
+                <div class="certificates-section">
+                    <h2 class="section-title">Verified Certificates</h2>
+                    <div class="certificates-grid" id="certificatesGrid">
+                        <!-- Certificates will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Certificate Access History -->
+                <div class="history-section">
+                    <h2 class="section-title">Certificate Access History</h2>
+                    <div class="history-table-container">
+                        <table class="history-table" id="historyTable">
+                            <thead>
+                                <tr>
+                                    <th>Institution</th>
+                                    <th>Certificate Accessed</th>
+                                    <th>Date of Access</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                                <!-- History will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other sections (hidden by default) -->
+            <section id="certificates-section" class="content-section">
+                <h1>My Certificates</h1>
+                <p>Manage and view all your certificates here.</p>
+                <div class="certificates-grid" id="myCertificatesGrid" style="margin-top: 2rem;">
+                    <!-- Certificates will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <section id="verify-section" class="content-section">
+                <div class="verify-header">
+                    <h1 class="verify-title">Verify & View Certificate</h1>
+                    <p class="verify-subtitle">Enter your name and certificate ID to view your certificate details and
+                        download the original file.</p>
+                </div>
+
+                <form class="certificate-form" id="certificateSearchForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="searchStudentName" class="form-label">Student Name</label>
+                            <input type="text" id="searchStudentName" name="searchStudentName" class="form-input"
+                                placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="searchCertificateId" class="form-label">Certificate ID</label>
+                            <input type="text" id="searchCertificateId" name="searchCertificateId" class="form-input"
+                                placeholder="Enter your unique certificate ID" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn" id="searchSubmitBtn">
+                            Search Certificate
+                        </button>
+                    </div>
+                </form>
+
+                <div id="searchResultArea"
+                    style="display: none; margin-top: 2rem; padding: 1.5rem; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h3 style="margin-bottom: 1rem; color: var(--text-main);">Certificate Found</h3>
+                    <div id="searchResultContent" style="display: grid; gap: 1rem; color: var(--text-muted);">
+                        <!-- Result gets injected here -->
+                    </div>
+                    <a id="downloadCertBtn" href="#" target="_blank"
+                        style="display: inline-block; margin-top: 1.5rem; padding: 0.75rem 1.5rem; background: var(--primary-color); color: white; border-radius: 6px; text-decoration: none; font-weight: 500;">
+                        View Original Certificate
+                    </a>
+                </div>
+            </section>
+
+            <section id="history-section" class="content-section">
+                <div class="verify-header">
+                    <h1 class="verify-title">Personal Document Vault</h1>
+                    <p class="verify-subtitle">Securely save and manage your personal certificates and documents.</p>
+                </div>
+
+                <form class="certificate-form" id="uploadCertificateForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="uploadCertName" class="form-label">Document Name</label>
+                            <input type="text" id="uploadCertName" name="certName" class="form-input" placeholder="e.g. B.Tech Degree, 10th Marksheet" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="uploadCertType" class="form-label">Category</label>
+                            <input type="text" id="uploadCertType" name="certType" class="form-input" placeholder="e.g. Degree, Marksheet, ID Proof" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="uploadIssueDate" class="form-label">Date Received (Optional)</label>
+                            <input type="date" id="uploadIssueDate" name="issueDate" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="uploadCertFile" class="form-label">Upload File (PDF/Image)</label>
+                            <input type="file" id="uploadCertFile" name="certFile" class="form-input" accept=".pdf,image/*" style="padding-top: 10px;" required>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn" id="uploadSubmitBtn">
+                            Save to Vault
+                        </button>
+                    </div>
+                </form>
+
+                <div id="uploadResultArea" style="display: none; margin-top: 2rem; padding: 1.5rem; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h3 style="margin-bottom: 1rem; color: var(--text-main);">Upload Successful!</h3>
+                    <div id="uploadResultContent" style="display: grid; gap: 1rem; color: var(--text-muted);">
+                        <!-- Result gets injected here -->
+                    </div>
+                    <a id="uploadDownloadBtn" href="#" target="_blank" style="display: inline-block; margin-top: 1.5rem; padding: 0.75rem 1.5rem; background: var(--primary-color); color: white; border-radius: 6px; text-decoration: none; font-weight: 500;">
+                        View / Download Certificate
+                    </a>
+                </div>
+            </section>
+
+            <section id="settings-section" class="content-section">
+                <div class="settings-header">
+                    <h1 class="settings-title">Settings</h1>
+                </div>
+
+                <div class="settings-container">
+                    <!-- Account Section -->
+                    <div class="settings-section">
+                        <h2 class="settings-section-title">Account</h2>
+
+                        <div class="setting-item" id="emailSection">
+                            <div class="setting-info">
+                                <label class="setting-label">Registered Email</label>
+                                <span class="setting-value" id="emailValue">Loading...</span>
+                                <input type="email" id="emailInput" class="setting-input" placeholder="Enter your email" style="display:none; margin-top:8px; width:100%; border:1px solid #d1d5db; padding:0.5rem; border-radius:6px;">
+                            </div>
+                            <div style="display:flex; gap:8px; flex-shrink:0;">
+                                <button class="edit-btn" id="editEmailBtn">Edit</button>
+                                <button class="edit-btn save-btn" id="saveEmailBtn" style="display:none;">Save</button>
+                                <button class="edit-btn cancel-btn" id="cancelEmailBtn" style="display:none;">Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="setting-item" id="passwordSection">
+                            <div class="setting-info">
+                                <label class="setting-label">Password</label>
+                                <span class="setting-value">••••••••</span>
+                            </div>
+                            <button class="edit-btn" id="requestOtpBtn">
+                                Change Password
+                            </button>
+                        </div>
+                        
+                        <div id="otpSection" style="display: none; border-top: 1px solid #e2e8f0; margin-top: 15px; padding-top: 15px;">
+                            <div class="setting-item" style="border: none; padding-bottom: 0;">
+                                <div class="setting-info" style="width: 100%;">
+                                    <label class="setting-label">Enter OTP (Sent to Email)</label>
+                                    <input type="text" id="otpInput" class="setting-input" style="display: block; width: 100%; margin-top: 8px; border: 1px solid #e2e8f0; padding: 0.5rem; border-radius: 6px;" placeholder="Enter 6-digit code">
+                                </div>
+                            </div>
+                            <div class="setting-item" style="border: none;">
+                                <div class="setting-info" style="width: 100%;">
+                                    <label class="setting-label">New Password</label>
+                                    <input type="password" id="newPasswordInput" class="setting-input" style="display: block; width: 100%; margin-top: 8px; border: 1px solid #e2e8f0; padding: 0.5rem; border-radius: 6px;" placeholder="Enter new password">
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 10px; margin-top: 15px; align-items: center;">
+                                <button class="edit-btn save-btn" id="confirmPasswordBtn" style="cursor: pointer;">Update Password</button>
+                                <button class="edit-btn cancel-btn" id="cancelOtpBtn" style="cursor: pointer;">Cancel</button>
+                                <button class="edit-btn" id="resendOtpBtn" style="margin-left: auto; cursor: pointer;" disabled>Resend OTP (60s)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Section -->
+                    <div class="settings-section">
+                        <h2 class="settings-section-title">Notifications</h2>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label class="setting-label">Email Notifications</label>
+                                <span class="setting-description">Receive email notifications about certificate
+                                    updates</span>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="emailNotifications" class="toggle-input" checked>
+                                <label for="emailNotifications" class="toggle-label"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- App Settings Section -->
+                    <div class="settings-section">
+                        <h2 class="settings-section-title">App Settings</h2>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label class="setting-label">Language</label>
+                                <span class="setting-description">Choose your preferred language</span>
+                            </div>
+                            <div class="setting-dropdown">
+                                <select id="languageSelect" class="dropdown-select">
+                                    <option value="english">English</option>
+                                    <option value="hindi">हिंदी</option>
+                                </select>
+                                <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="6,9 12,15 18,9"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <label class="setting-label">Theme</label>
+                                <span class="setting-description">Select your preferred app theme</span>
+                            </div>
+                            <div class="setting-dropdown">
+                                <select id="themeSelect" class="dropdown-select">
+                                    <option value="light">Light</option>
+                                    <option value="dark">Dark</option>
+                                </select>
+                                <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="6,9 12,15 18,9"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/HomePage/toast.js"></script>
+    <script src="student-dashboard.js"></script>
+    <script>
+        function blockBackNavigation() {
+            history.pushState(null, null, location.href);
+        }
+
+        // Always intercept back navigation and redirect to login
+        window.onpopstate = function () {
+            blockBackNavigation();
+            var confirmLeave = confirm('Are you sure you want to leave the dashboard?');
+            if (confirmLeave) {
+                sessionStorage.removeItem("student-logged-in");
+                window.location.replace('/student-login/student-login.html');
+            }
+        };
+    </script>
+</body>
+
+</html>

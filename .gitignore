@@ -1,0 +1,8 @@
+node_modules/
+uploads/
+verified_documents/
+.idea/
+.vscode/
+database.json
+users.json
+*.traineddata

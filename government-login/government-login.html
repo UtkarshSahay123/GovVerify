@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Login - GovAuth</title>
+    <link rel="stylesheet" href="../employee-login/employee-login.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span class="logo-text">GovAuth</span>
+            </div>
+            <nav class="nav">
+                <a href="../HomePage/index.html" class="nav-link">Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="login-container">
+            <div class="login-form">
+                <h1 class="login-title">Government Login</h1>
+                
+                <form id="loginForm" class="form">
+                    <div class="form-group">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" id="username" name="username" class="form-input" placeholder="Enter official username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="password-header">
+                            <label for="password" class="form-label">Password</label>
+                        </div>
+                        <input type="password" id="password" name="password" class="form-input" placeholder="Enter password" required>
+                    </div>
+
+                    <button type="submit" class="login-button">Login</button>
+                </form>
+
+                <div class="signup-section">
+                    <span class="signup-text">or</span>
+                    <p class="signup-prompt">
+                        Official account not created? 
+                        <a href="government-signup.html" class="signup-link">Sign up</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="government-login.js"></script>
+</body>
+</html>

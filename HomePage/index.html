@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GovVerify - Verify Your Credentials</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span id="reloadText">GovVerify</span>
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <div class="language-selector">
+                    <i class="fas fa-globe"></i>
+                    <select id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                    </select>
+                </div>
+
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Slideshow -->
+    <section class="hero">
+        <div class="slideshow-container">
+            <div class="slide active">
+                <img src="https://blog.careerguide.com/wp-content/uploads/2021/06/Untitled-design-24-1-1024x576.jpg"
+                    alt="Government Building">
+            </div>
+            <div class="slide">
+                <img src="https://www.iitism.ac.in/storage/files/banner1-1200x630.jpg?token=acfc868ef15b866c31590c2a2c462ed2"
+                    alt="Modern Government Building">
+            </div>
+            <div class="slide">
+                <img src="https://jharkhanduniversities.nic.in/resources/university/CPU0013.jpg"
+                    alt="University Building">
+            </div>
+            <div class="slide">
+                <img src="https://img.collegepravesh.com/2016/10/NIT-Jamshedpur.jpg" alt="University Building">
+            </div>
+
+            <div class="slide-controls">
+                <button class="prev-btn" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="next-btn" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="slide-indicators">
+                <span class="indicator active" data-slide="0"></span>
+                <span class="indicator" data-slide="1"></span>
+                <span class="indicator" data-slide="2"></span>
+                <span class="indicator" data-slide="3"></span>
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <div class="container">
+                <h1 data-en="Verify Your Credentials" data-hi="अपनी साख सत्यापित करें">Verify Your Credentials</h1>
+                <p data-en="Check the authenticity of certificates issued by educational institutions and government agencies with our secure and reliable platform."
+                    data-hi="हमारे सुरक्षित और विश्वसनीय प्लेटफॉर्म के साथ शैक्षणिक संस्थानों और सरकारी एजेंसियों द्वारा जारी प्रमाणपत्रों की प्रामाणिकता की जांच करें।">
+                    Check the authenticity of certificates issued by educational institutions and government agencies
+                    with our secure and reliable platform.
+                </p>
+                <button class="cta-button" id="getStartedBtn" data-en="Get Started" data-hi="शुरू करें">Get
+                    Started</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Information Section -->
+    <section class="legal-section">
+        <div class="container">
+            <h2 data-en="Forging is an Offensive Crime" data-hi="जालसाजी एक आपराधिक अपराध है">Forging is an Offensive
+                Crime</h2>
+            <p data-en="Forgery of documents is a serious criminal offense under the Indian Penal Code, 1860. It is crucial to understand the legal ramifications to deter such activities."
+                data-hi="दस्तावेजों की जालसाजी भारतीय दंड संहिता, 1860 के तहत एक गंभीर आपराधिक अपराध है। ऐसी गतिविधियों को रोकने के लिए कानूनी परिणामों को समझना महत्वपूर्ण है।">
+                Forgery of documents is a serious criminal offense under the Indian Penal Code, 1860. It is crucial to
+                understand the legal ramifications to deter such activities.
+            </p>
+
+            <div class="legal-cards">
+                <div class="legal-card">
+                    <h3 data-en="Section 463: Forgery" data-hi="धारा 463: जालसाजी">Section 463: Forgery</h3>
+                    <p data-en="Whoever makes any false document or false electronic record or part of a document or electronic record, with intent to cause damage or injury to the public or to any person, or to support any claim or title, or to cause any person to part with property, or to enter into any express or implied contract, or with intent to commit fraud or that fraud may be committed, commits forgery."
+                        data-hi="जो कोई भी झूठा दस्तावेज या झूठा इलेक्ट्रॉनिक रिकॉर्ड या दस्तावेज या इलेक्ट्रॉनिक रिकॉर्ड का हिस्सा बनाता है, जनता या किसी व्यक्ति को नुकसान या चोट पहुंचाने के इरादे से, या किसी दावे या शीर्षक का समर्थन करने के लिए, या किसी व्यक्ति को संपत्ति से अलग करने के लिए, या किसी स्पष्ट या निहित अनुबंध में प्रवेश करने के लिए, या धोखाधड़ी करने के इरादे से या धोखाधड़ी की जा सकती है, जालसाजी करता है।">
+                        Whoever makes any false document or false electronic record or part of a document or electronic
+                        record, with intent to cause damage or injury to the public or to any person, or to support any
+                        claim or title, or to cause any person to part with property, or to enter into any express or
+                        implied contract, or with intent to commit fraud or that fraud may be committed, commits
+                        forgery.
+                    </p>
+                </div>
+
+                <div class="legal-card">
+                    <h3 data-en="Section 465: Punishment for Forgery" data-hi="धारा 465: जालसाजी के लिए सजा">Section
+                        465: Punishment for Forgery</h3>
+                    <p data-en="Whoever commits forgery shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both."
+                        data-hi="जो कोई भी जालसाजी करता है, उसे दो साल तक की अवधि के लिए किसी भी प्रकार के कारावास से दंडित किया जाएगा, या जुर्माने से, या दोनों से।">
+                        Whoever commits forgery shall be punished with imprisonment of either description for a term
+                        which may extend to two years, or with fine, or with both.
+                    </p>
+                </div>
+
+                <div class="legal-card">
+                    <h3 data-en="Section 468: Forgery for Purpose of Cheating"
+                        data-hi="धारा 468: धोखाधड़ी के उद्देश्य से जालसाजी">Section 468: Forgery for Purpose of Cheating
+                    </h3>
+                    <p data-en="Whoever commits forgery, intending that the document or electronic record forged shall be used for the purpose of cheating, shall be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine."
+                        data-hi="जो कोई भी जालसाजी करता है, इस इरादे से कि जाली दस्तावेज या इलेक्ट्रॉनिक रिकॉर्ड का उपयोग धोखाधड़ी के उद्देश्य से किया जाएगा, उसे सात साल तक की अवधि के लिए किसी भी प्रकार के कारावास से दंडित किया जाएगा, और जुर्माने का भी दायी होगा।">
+                        Whoever commits forgery, intending that the document or electronic record forged shall be used
+                        for the purpose of cheating, shall be punished with imprisonment of either description for a
+                        term which may extend to seven years, and shall also be liable to fine.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Designation Selection Section -->
+    <section class="designation-section" id="designation">
+        <div class="container">
+            <h2 data-en="Choose Your Designation" data-hi="अपना पदनाम चुनें">Choose Your Designation</h2>
+            <p data-en="Select your role to begin the verification process."
+                data-hi="सत्यापन प्रक्रिया शुरू करने के लिए अपनी भूमिका का चयन करें।">Select your role to begin the
+                verification process.</p>
+
+            <div class="designation-grid">
+                <div class="designation-card" data-role="student">
+                    <div class="designation-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 data-en="Student" data-hi="छात्र">Student</h3>
+                </div>
+
+                <div class="designation-card" data-role="employee">
+                    <div class="designation-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 data-en="Employee" data-hi="कर्मचारी">Employee</h3>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" id="statUsers">0</div>
+                    <div class="stat-label" data-en="Users" data-hi="उपयोगकर्ता">Users</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-number" id="statVerified">0</div>
+                    <div class="stat-label" data-en="Certificates Verified" data-hi="प्रमाणपत्र सत्यापित">Certificates
+                        Verified</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-number" id="statUploaded">0</div>
+                    <div class="stat-label" data-en="Total Certificates Uploaded" data-hi="कुल प्रमाणपत्र अपलोड">Total
+                        Certificates Uploaded</div>
+                </div>
+
+                <div class="stat-item">
+                    <div class="stat-number" id="statUniversities">0</div>
+                    <div class="stat-label" data-en="Connected Universities & Colleges"
+                        data-hi="जुड़े विश्वविद्यालय और कॉलेज">Connected Universities & Colleges</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container" style="text-align: center; padding: 2rem 0;">
+            <h3><strong>Developed by US INFOTECH</strong></h3>
+            <div style="margin-top: 1rem;">
+                <p>Contact us:</p>
+                <div class="social-icons"
+                    style="justify-content: center; margin-top: 0.5rem; display: flex; gap: 1.5rem;">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=utkarshsahay321@gmail.com" target="_blank" title="Email"><i
+                            class="fas fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com/in/utkarsh-sahay-9b7252237/" target="_blank" title="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/UtkarshSahay123/GovVerify" target="_blank" title="GitHub"><i
+                            class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

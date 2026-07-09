@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - GovVerify</title>
+    <link rel="stylesheet" href="/student-login/student-login.css">
+    <link rel="stylesheet" href="/HomePage/toast.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <div class="logo">
+                    <i class="fas fa-shield-alt" style="color: #3b82f6; font-size: 24px; margin-right: 8px;"></i>
+                    <span class="logo-text">GovVerify</span>
+                </div>
+            </a>
+
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="login-container">
+            <div class="login-form">
+                <h1 class="login-title">Student Login</h1>
+                <p class="login-subtitle">Access your account to view and manage your certificates.</p>
+
+                <form id="loginForm" class="form">
+                    <div class="field-container" style="margin-bottom: 1.25rem; text-align: left;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: #cbd5e1; font-size: 0.875rem; font-weight: 500; margin-left: 0.25rem;">Username</label>
+                        <div class="input-group" style="margin-bottom: 0;">
+                            <div class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </div>
+                            <input type="text" id="username" name="username" placeholder="Enter your username" class="input-field"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="field-container" style="margin-bottom: 1.25rem; text-align: left;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: #cbd5e1; font-size: 0.875rem; font-weight: 500; margin-left: 0.25rem;">Password</label>
+                        <div class="input-group" style="margin-bottom: 0; position: relative;">
+                            <div class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <circle cx="12" cy="16" r="1"></circle>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" class="input-field"
+                                required>
+                            <button type="button" id="togglePassword"
+                                style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;z-index:2;">
+                                <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="field-container" style="margin-bottom: 1.25rem; text-align: left;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: #cbd5e1; font-size: 0.875rem; font-weight: 500; margin-left: 0.25rem;">Security Verification</label>
+                        <div class="captcha-group" style="margin-bottom: 0;">
+                            <div class="input-group captcha-input">
+                                <div class="input-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    </svg>
+                                </div>
+                                <input type="text" id="captcha" name="captcha" placeholder="Enter Captcha text"
+                                    class="input-field" required>
+                            </div>
+                            <div class="captcha-display">
+                                <span id="captchaText" class="captcha-text"></span>
+                                <button type="button" id="refreshCaptcha" class="captcha-refresh">↻</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="forgot-password">
+                        <a href="#" id="forgotPasswordLink" class="forgot-link">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="login-btn">Login</button>
+
+                    <div class="signup-section">
+                        <span class="or-text">or</span>
+                        <p class="signup-text">
+                            Not connected to us yet?
+                            <a href="/student-login/student-signup.html" class="signup-link">Sign up</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const homeNavLink = document.getElementById('homeNavLink');
+        if (homeNavLink) {
+            homeNavLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.location.href = '../HomePage/index.html';
+            });
+        }
+        // Password eye toggle
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            var passwordInput = document.getElementById('password');
+            var eyeIcon = document.getElementById('eyeIcon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.innerHTML = '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/><line x1="2" y1="2" x2="22" y2="22"/>';
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.innerHTML = '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>';
+            }
+        });
+    </script>
+    
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; justify-content: center; align-items: center;">
+        <div class="modal-content" style="background: var(--bg-card, #1e293b); padding: 2rem; border-radius: 12px; width: 90%; max-width: 400px; color: var(--text-main, #f8fafc);">
+            <h2 style="margin-bottom: 1rem; color: #fff;">Reset Password</h2>
+            
+            <div id="fpStep1">
+                <p style="margin-bottom: 1rem; color: #94a3b8; font-size: 0.9rem;">Enter your email ID to receive an OTP.</p>
+                <div class="field-container" style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #cbd5e1; font-size: 0.875rem;">Email ID</label>
+                    <input type="email" id="fpEmail" class="input-field" style="width: 100%; box-sizing: border-box;" placeholder="Email ID">
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" id="fpCancelBtn" style="padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid #475569; background: transparent; color: #cbd5e1; cursor: pointer;">Cancel</button>
+                    <button type="button" id="fpSendOtpBtn" style="padding: 0.5rem 1rem; border-radius: 6px; border: none; background: #3b82f6; color: white; cursor: pointer;">Send OTP</button>
+                </div>
+            </div>
+
+            <div id="fpStep2" style="display: none;">
+                <p style="margin-bottom: 1rem; color: #94a3b8; font-size: 0.9rem;">Enter the OTP sent to your email and your new password.</p>
+                <div class="field-container" style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #cbd5e1; font-size: 0.875rem;">OTP</label>
+                    <input type="text" id="fpOtp" class="input-field" style="width: 100%; box-sizing: border-box;" placeholder="Enter 6-digit OTP">
+                </div>
+                <div class="field-container" style="margin-bottom: 1rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #cbd5e1; font-size: 0.875rem;">New Password</label>
+                    <input type="password" id="fpNewPassword" class="input-field" style="width: 100%; box-sizing: border-box;" placeholder="New Password">
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" id="fpCancelBtn2" style="padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid #475569; background: transparent; color: #cbd5e1; cursor: pointer;">Cancel</button>
+                    <button type="button" id="fpResetBtn" style="padding: 0.5rem 1rem; border-radius: 6px; border: none; background: #10b981; color: white; cursor: pointer;">Reset Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/HomePage/toast.js"></script>
+    <script src="/student-login/student-login.js"></script>
+</body>
+
+</html>
