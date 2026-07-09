@@ -224,7 +224,7 @@ async function loadCertificates() {
                 <a href="${cert.fileUrl}" target="_blank" class="view-details-btn" style="flex:1; text-decoration:none; text-align:center; background:#2563eb; color:white; padding:0.5rem 1rem; border-radius:4px;">
                     View
                 </a>
-                <a href="${cert.fileUrl}" download class="view-details-btn" style="flex:1; text-decoration:none; text-align:center; background:#10b981; color:white; padding:0.5rem 1rem; border-radius:4px;">
+                <a href="${cert.fileUrl}?download=1" download class="view-details-btn" style="flex:1; text-decoration:none; text-align:center; background:#10b981; color:white; padding:0.5rem 1rem; border-radius:4px;">
                     Download
                 </a>
                 <button onclick="deleteCertificate('${cert.certificateId}')" class="view-details-btn" style="flex:1; border:none; cursor:pointer; text-align:center; background:#ef4444; color:white; padding:0.5rem 1rem; border-radius:4px;">
@@ -344,7 +344,7 @@ function setupCertificateForm() {
           <p><strong>Issuing Authority:</strong> ${cert.issuingAuthority}</p>
           <p><strong>Issue Date:</strong> ${cert.issueDate ? new Date(cert.issueDate).toLocaleDateString() : 'N/A'}</p>
         `
-        downloadBtn.href = cert.fileUrl
+        downloadBtn.href = cert.fileUrl + "?download=1"
         downloadBtn.style.background = "#2563eb"
         downloadBtn.style.color = "white"
         downloadBtn.style.textDecoration = "none"
@@ -398,7 +398,7 @@ if (uploadForm) {
       
       if (response.ok) {
          resultContent.innerHTML = `<p><strong>Success:</strong> Document saved to your vault.</p>`;
-         downloadBtn.href = data.fileUrl;
+         downloadBtn.href = data.fileUrl + "?download=1";
          resultArea.style.display = "block";
          uploadForm.reset();
          

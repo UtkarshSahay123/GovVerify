@@ -425,7 +425,7 @@ function populateManageSection() {
             <p><strong>Status:</strong> <span class="status-badge status-${cert.status}">${cert.status}</span></p>
             <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
                 <a href="${cert.fileUrl}" target="_blank" class="view-details-btn" style="flex:1; text-align:center; text-decoration:none; background:#3b82f6; color:white; padding:0.5rem; border-radius:4px;">View</a>
-                <a href="${cert.fileUrl}" download class="view-details-btn" style="flex:1; text-align:center; text-decoration:none; background:#10b981; color:white; padding:0.5rem; border-radius:4px;">Download</a>
+                <a href="${cert.fileUrl}?download=1" download class="view-details-btn" style="flex:1; text-align:center; text-decoration:none; background:#10b981; color:white; padding:0.5rem; border-radius:4px;">Download</a>
                 <button onclick="deleteCertificate('${cert.certificateId}')" class="view-details-btn" style="flex:1; text-align:center; background:#ef4444; color:white; border:none; border-radius:4px; cursor:pointer; padding:0.5rem;">Delete</button>
             </div>
         </div>
