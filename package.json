@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon server.js",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "node server.js",
+    "build": "echo 'No build step required'"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
