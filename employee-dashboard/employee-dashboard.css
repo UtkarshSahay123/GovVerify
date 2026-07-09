@@ -1283,3 +1283,6 @@ body {
     padding: 0.5rem;
   }
 }
+
+html, body { overflow-x: hidden; max-width: 100vw; }
+

@@ -88,3 +88,6 @@
 .toast-close:hover {
     color: white;
 }
+
+html, body { overflow-x: hidden; max-width: 100vw; }
+

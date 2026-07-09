@@ -394,3 +394,6 @@ body::before {
     font-size: 1.5rem;
   }
 }
+
+html, body { overflow-x: hidden; max-width: 100vw; }
+
